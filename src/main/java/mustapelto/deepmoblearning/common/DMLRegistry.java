@@ -24,6 +24,8 @@ import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.Collection;
+
 @EventBusSubscriber
 public class DMLRegistry {
     public static final NonNullList<Item> registeredItems = NonNullList.create();
@@ -168,9 +170,17 @@ public class DMLRegistry {
         return ItemStack.EMPTY;
     }
 
+    public static Collection<ItemPristineMatter> getPristineMatters() {
+        return registeredPristineMatter.values();
+    }
+
     public static ItemStack getDataModel(String id) {
         if (registeredDataModels.containsKey(id))
             return new ItemStack(registeredDataModels.get(id));
         return ItemStack.EMPTY;
+    }
+
+    public static Collection<ItemDataModel> getDataModels() {
+        return registeredDataModels.values();
     }
 }

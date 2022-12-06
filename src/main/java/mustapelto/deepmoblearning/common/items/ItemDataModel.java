@@ -10,7 +10,9 @@ import mustapelto.deepmoblearning.common.util.DataModelHelper;
 import mustapelto.deepmoblearning.common.util.StringHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -39,6 +41,11 @@ public class ItemDataModel extends ItemBase {
 
         if (!metadata.isPresent())
             return;
+
+        if (!metadata.get().isEnabled()) {
+            tooltip.add(TextFormatting.GRAY + I18n.format("deepmoblearning.data_model.disabled") + TextFormatting.RESET);
+            return;
+        }
 
         String extraToolTip = metadata.get().getExtraTooltip();
         if (!extraToolTip.equals("")) {
@@ -94,5 +101,12 @@ public class ItemDataModel extends ItemBase {
             }
         }
         return StringHelper.getFormattedString(name + tier, TextFormatting.AQUA);
+    }
+
+    @Override
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (metadata.isEnabled()) {
+            super.getSubItems(tab, items);
+        }
     }
 }

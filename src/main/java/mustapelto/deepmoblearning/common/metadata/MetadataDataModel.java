@@ -60,6 +60,7 @@ public class MetadataDataModel extends Metadata {
     // Data from JSON
     private final String dataModelID;
     private final String modID;
+    private final boolean isEnabled;
     private final String displayName; // Used in Data Model and Pristine Matter display name, and Deep Learner GUI. Default: metadataID
     private final String displayNamePlural; // Plural form of display name. Used in Deep Learner GUI. Default: displayName + "s"
     private final String livingMatterString; // Living Matter type gained from simulating this Model.
@@ -87,6 +88,7 @@ public class MetadataDataModel extends Metadata {
                 .orElse(DEFAULT_DATA_MODEL_ID);
         modID = getString(data, MOD_ID)
                 .orElse(DEFAULT_MOD_ID);
+        isEnabled = DMLRHelper.isModLoaded(modID);
 
         defaultRegistryString = DMLRHelper.getRegistryString(modID, dataModelID);
 
@@ -128,7 +130,7 @@ public class MetadataDataModel extends Metadata {
 
     @Override
     public void finalizeData() {
-        if (!DMLRHelper.isModLoaded(modID))
+        if (!DMLRHelper.isModLoaded(modID) || !isEnabled)
             return;
 
         ImmutableList.Builder<ResourceLocation> mobListBuilder = ImmutableList.builder();
@@ -172,6 +174,10 @@ public class MetadataDataModel extends Metadata {
 
     public String getModID() {
         return modID;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
     }
 
     public String getDataModelRegistryID() {
