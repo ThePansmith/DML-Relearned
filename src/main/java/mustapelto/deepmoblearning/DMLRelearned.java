@@ -5,6 +5,8 @@ import mustapelto.deepmoblearning.common.DMLRegistry;
 import mustapelto.deepmoblearning.common.ServerProxy;
 import mustapelto.deepmoblearning.common.metadata.MetadataManager;
 import mustapelto.deepmoblearning.common.network.DMLPacketHandler;
+import mustapelto.deepmoblearning.common.patchouli.PatchouliModule;
+import mustapelto.deepmoblearning.common.util.DMLRHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
@@ -14,6 +16,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
@@ -58,12 +61,18 @@ public class DMLRelearned
 
         // Finalize Metadata (create recipes and other stuff that may depend on other mods' items being registered)
         MetadataManager.finalizeData();
+
+        if (DMLRHelper.isModLoaded(DMLConstants.ModDependencies.PATCHOULI) && event.getSide() == Side.CLIENT) {
+            PatchouliModule.init();
+        }
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-
+        if (DMLRHelper.isModLoaded(DMLConstants.ModDependencies.PATCHOULI) && event.getSide() == Side.CLIENT) {
+            PatchouliModule.postInit();
+        }
     }
 
     public static final CreativeTabs creativeTab = new CreativeTabs(DMLConstants.ModInfo.ID) {
