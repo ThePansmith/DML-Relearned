@@ -53,6 +53,36 @@ public class DMLConstants {
         public static final ResourceLocation PRISTINE_MATTER = new ResourceLocation(DMLConstants.ModInfo.ID, "items/pristine_matter_default");
     }
 
+    public static final class Trials {
+        public static final String TRIAL_KEYSTONE_POS = ModInfo.ID + ":tilepos"; // NBT key for the position of the Trial Keystone
+        public static final String TRIAL_AFFIX_CONNECTION = ModInfo.ID + ":mob_type"; // NBT key for an affix on a mob
+
+        public static final class Affix {
+            public static final String SPEED = "speed";
+            public static final String REGEN_PARTY = "regen_party";
+            public static final String EMPOWERED_GLITCHES = "empowered_glitches";
+            public static final String KNOCKBACK_IMMUNITY = "knockback_immunity";
+            public static final String BLAZE_INVADERS = "blaze_invaders";
+            public static final String LOOT_HOARDERS = "loot_hoarders";
+            public static final String THUNDERDOME = "thunderdome";
+        }
+
+        public static final class Message {
+            public static final String TRIAL_ABORT = "TrialAborted";
+            public static final String TRIAL_COMPLETE = "TrialCompleted";
+            public static final String WAVE_COUNTDOWN = "WaveCountdown";
+            public static final String WAVE_NUMBER = "WaveNumber";
+            public static final String GLITCH_NOTIF = "GlitchNotification";
+        }
+    }
+
+    public static final class Sounds {
+        public static final String WAVE_START = "waveStart";
+        public static final String GLITCH_ALERT = "glitchAlert";
+        public static final String WAVE_COUNTDOWN = "waveCountdown";
+        public static final String TRIAL_WON = "trialWon";
+    }
+
     public static final class Gui {
         public static final int ROW_SPACING = 12;
 

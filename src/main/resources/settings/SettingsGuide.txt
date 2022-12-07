@@ -34,7 +34,7 @@ Object structure:
                            IN ADDITION to a single Blank Model.
     "associatedMobs": Array of Entity Strings (REQUIRED). These entities will give the Model data when killed.
     "lootItems": Array of Item Strings (REQUIRED). Items that can be produced from this Model's Pristine Matter.
-    "trial": Object. Describes everything Trial related. If missing, uses default values.
+    "trial": Object. Describes everything Trial related. If missing, no trial will be available.
     {
         "entities": Entity String or array of Entity Strings with optional weight (comma-separated). Default weight: 100.
                     Entities to spawn during a Trial will be randomly selected from this list, according to their weight.

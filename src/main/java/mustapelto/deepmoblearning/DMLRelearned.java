@@ -3,12 +3,15 @@ package mustapelto.deepmoblearning;
 import mustapelto.deepmoblearning.common.DMLGuiHandler;
 import mustapelto.deepmoblearning.common.DMLRegistry;
 import mustapelto.deepmoblearning.common.ServerProxy;
+import mustapelto.deepmoblearning.common.capability.CapabilityPlayerTrial;
 import mustapelto.deepmoblearning.common.metadata.MetadataManager;
 import mustapelto.deepmoblearning.common.network.DMLPacketHandler;
 import mustapelto.deepmoblearning.common.patchouli.PatchouliModule;
 import mustapelto.deepmoblearning.common.util.DMLRHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -52,6 +55,15 @@ public class DMLRelearned
         // Network Stuff
         DMLPacketHandler.registerPackets();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new DMLGuiHandler());
+
+        // Loot tables
+        LootTableList.register(new ResourceLocation(DMLConstants.ModInfo.ID, "glitch"));
+        LootTableList.register(new ResourceLocation(DMLConstants.ModInfo.ID, "loot_hoarder"));
+
+        // Capabilities
+        CapabilityPlayerTrial.init();
+
+        proxy.registerEntityRenderers();
     }
 
     @EventHandler

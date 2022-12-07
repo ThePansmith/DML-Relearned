@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import mustapelto.deepmoblearning.DMLConstants;
 import mustapelto.deepmoblearning.DMLRelearned;
 import mustapelto.deepmoblearning.common.blocks.*;
-import mustapelto.deepmoblearning.common.entities.EntityItemGlitchFragment;
+import mustapelto.deepmoblearning.common.entities.*;
 import mustapelto.deepmoblearning.common.items.*;
 import mustapelto.deepmoblearning.common.metadata.MetadataManager;
 import mustapelto.deepmoblearning.common.tiles.TileEntityLootFabricator;
@@ -137,16 +137,66 @@ public class DMLRegistry {
     public static void registerEntities(RegistryEvent.Register<EntityEntry> event) {
         IForgeRegistry<EntityEntry> registry = event.getRegistry();
 
-        final ResourceLocation itemGlitchFragmentRegistryName = new ResourceLocation(DMLConstants.ModInfo.ID, "item_glitch_fragment");
+        final ResourceLocation entityGlitchName = new ResourceLocation(DMLConstants.ModInfo.ID, "glitch");
+        final ResourceLocation entityGlitchOrbName = new ResourceLocation(DMLConstants.ModInfo.ID, "glitch_orb");
+        final ResourceLocation entityTrialEndermanName = new ResourceLocation(DMLConstants.ModInfo.ID, "trial_enderman");
+        final ResourceLocation entityTrialSpiderName = new ResourceLocation(DMLConstants.ModInfo.ID, "trial_spider");
+        final ResourceLocation entityTrialCaveSpiderName = new ResourceLocation(DMLConstants.ModInfo.ID, "trial_cave_spider");
+        final ResourceLocation entityTrialSlimeName = new ResourceLocation(DMLConstants.ModInfo.ID, "trial_slime");
+        final ResourceLocation itemGlitchFragmentName = new ResourceLocation(DMLConstants.ModInfo.ID, "item_glitch_fragment");
 
-        EntityEntry itemGlitchFragment = EntityEntryBuilder.create()
-                .entity(EntityItemGlitchFragment.class)
-                .id(itemGlitchFragmentRegistryName, entityId++)
-                .name(itemGlitchFragmentRegistryName.getPath())
+        EntityEntry entityGlitch = EntityEntryBuilder.create()
+                .entity(EntityGlitch.class)
+                .id(entityGlitchName, entityId++)
+                .name(entityGlitchName.getPath())
+                .tracker(64, 1, true)
+                .egg(0, DMLConstants.Gui.Colors.AQUA)
+                .build();
+
+        EntityEntry entityGlitchOrb = EntityEntryBuilder.create()
+                .entity(EntityGlitchOrb.class)
+                .id(entityGlitchOrbName, entityId++)
+                .name(entityGlitchOrbName.getPath())
                 .tracker(64, 1, true)
                 .build();
 
-        registry.registerAll(itemGlitchFragment);
+        EntityEntry entityTrialEnderman = EntityEntryBuilder.create()
+                .entity(EntityTrialEnderman.class)
+                .id(entityTrialEndermanName, entityId++)
+                .name(entityTrialEndermanName.getPath())
+                .tracker(64, 1, true)
+                .build();
+
+        EntityEntry entityTrialSpider = EntityEntryBuilder.create()
+                .entity(EntityTrialSpider.class)
+                .id(entityTrialSpiderName, entityId++)
+                .name(entityTrialSpiderName.getPath())
+                .tracker(64, 1, true)
+                .build();
+
+        EntityEntry entityTrialCaveSpider = EntityEntryBuilder.create()
+                .entity(EntityTrialCaveSpider.class)
+                .id(entityTrialCaveSpiderName, entityId++)
+                .name(entityTrialCaveSpiderName.getPath())
+                .tracker(64, 1, true)
+                .build();
+
+        EntityEntry entityTrialSlime = EntityEntryBuilder.create()
+                .entity(EntityTrialSlime.class)
+                .id(entityTrialSlimeName, entityId++)
+                .name(entityTrialSlimeName.getPath())
+                .tracker(64, 1, true)
+                .build();
+
+        EntityEntry itemGlitchFragment = EntityEntryBuilder.create()
+                .entity(EntityItemGlitchFragment.class)
+                .id(itemGlitchFragmentName, entityId++)
+                .name(itemGlitchFragmentName.getPath())
+                .tracker(64, 1, true)
+                .build();
+
+        registry.registerAll(entityGlitch, entityGlitchOrb, entityTrialEnderman,
+                entityTrialSpider, entityTrialCaveSpider, entityTrialSlime, itemGlitchFragment);
     }
 
     @SubscribeEvent

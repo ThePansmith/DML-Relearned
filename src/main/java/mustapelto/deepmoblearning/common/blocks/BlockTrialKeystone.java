@@ -44,4 +44,15 @@ public class BlockTrialKeystone extends BlockTileEntity {
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
+
+    @Override
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        TileEntity tile = world.getTileEntity(pos);
+        if (tile instanceof TileEntityTrialKeystone) {
+            TileEntityTrialKeystone keystone = (TileEntityTrialKeystone) tile;
+            keystone.stopTrial(true, true);
+            // todo drop key?
+        }
+        super.breakBlock(world, pos, state);
+    }
 }

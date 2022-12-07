@@ -1,5 +1,7 @@
 package mustapelto.deepmoblearning.common.util;
 
+import mustapelto.deepmoblearning.common.network.DMLPacketHandler;
+import mustapelto.deepmoblearning.common.network.MessageTrialOverlay;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -48,5 +50,9 @@ public class PlayerHelper {
             return offHandStack;
 
         return ItemStack.EMPTY;
+    }
+
+    public static void sendMessageToOverlay(EntityPlayerMP player, String type) {
+        DMLPacketHandler.sendToClientPlayer(new MessageTrialOverlay(type), player);
     }
 }

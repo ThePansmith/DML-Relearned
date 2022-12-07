@@ -84,8 +84,9 @@ deepmoblearning.trial_key.attunement_message=%s was attuned to: %s
 deepmoblearning.trial_key.cannot_attune_message=Can't attune the %s - there is no Trial for %s
 deepmoblearning.trial_key.tooltip.attunement=Attuned to: %s
 deepmoblearning.trial_key.tooltip.tier=Tier: %s
-deepmoblearning.trial_key.tooltip.affixes=Affixes:
+deepmoblearning.trial_key.tooltip.affixes=Affixes: %s
 deepmoblearning.trial_key.tooltip.no_affixes=Trial has no affixes
+deepmoblearning.trial_key.tooltip.affixes_faulty=Faulty level trials have no affixes.
 deepmoblearning.trial_key.tooltip.affix_info=Read more about each affix in the Guidebook
 deepmoblearning.trial_key.tooltip.not_attuned=Currently not attuned
 deepmoblearning.trial_key.tooltip.available_attunements=Available attunements:
@@ -203,10 +204,25 @@ deepmoblearning.button_page_select.prev=Previous page
 # Trials
 deepmoblearning.trial.message.player_left=You left the Trial!
 deepmoblearning.trial.message.aborted=Trial aborted due to unknown reasons
+deepmoblearning.trial.message.failed=Trial failed, all participants have died/left the arena
 deepmoblearning.trial.message.completed=Good job! Collect your reward from the keystone
 deepmoblearning.trial.message.wave=Wave
-deepmoblearning.trial.message.glitch_1=Glitch Alert
+deepmoblearning.trial.message.wave_number=Wave %d
+deepmoblearning.trial.message.next_wave=Next wave in: %d
+deepmoblearning.trial.message.wave_cleared=Wave cleared
+deepmoblearning.trial.message.enemies_left=%d to go
+deepmoblearning.trial.message.opponents=Opponents
+deepmoblearning.trial.message.glitch_1=! Glitch Alert !
 deepmoblearning.trial.message.glitch_2=Deal with it before it becomes a problem
+
+# Affixes
+deepmoblearning.affix.blaze_invaders.name=Blaze Invaders
+deepmoblearning.affix.empowered_glitches.name=Empowered Glitches
+deepmoblearning.affix.knockback_immunity.name=Knockback Immunity
+deepmoblearning.affix.loot_hoarder.name=Loot Hoarders
+deepmoblearning.affix.regen_party.name=Regen Party
+deepmoblearning.affix.speed.name=Speed
+deepmoblearning.affix.thunderdome.name=THUNDERDOME
 
 # Creative Tab
 itemGroup.deepmoblearning=DML Relearned

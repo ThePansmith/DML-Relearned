@@ -73,7 +73,6 @@ public class MetadataDataModel extends Metadata {
     private final DeepLearnerDisplayData deepLearnerDisplayData; // Data used in Deep Learner display
 
     // Calculated data
-    private final String defaultRegistryString; // [modID]:[metadataID]
     private ImmutableList<ResourceLocation> associatedMobs; // List of mobs that increase Model data.
     private ImmutableList<ItemStack> lootItems; // List of actual ItemStacks that can be selected as "loot"
     private ItemStack livingMatter; // Living Matter data associated with this Data Model
@@ -89,8 +88,6 @@ public class MetadataDataModel extends Metadata {
         modID = getString(data, MOD_ID)
                 .orElse(DEFAULT_MOD_ID);
         isEnabled = DMLRHelper.isModLoaded(modID);
-
-        defaultRegistryString = DMLRHelper.getRegistryString(modID, dataModelID);
 
         displayName = getString(data, DISPLAY_NAME)
                 .orElse(StringHelper.uppercaseFirst(dataModelID));
@@ -366,6 +363,8 @@ public class MetadataDataModel extends Metadata {
             mobsPerWave = ImmutableList.of();
             spawnDelay = 2;
             rewardStrings = ImmutableList.of();
+            entities = ImmutableList.of();
+            rewards = ImmutableList.of();
         }
 
         public TrialData(JsonObject data, MetadataDataModel container) {
@@ -405,13 +404,7 @@ public class MetadataDataModel extends Metadata {
             }
 
             if (!hasValidEntities) {
-                // Try using categoryID:metadataID
-                if (DMLRHelper.isRegisteredEntity(container.defaultRegistryString)) {
-                    builder.add(new WeightedString(container.defaultRegistryString, 100));
-                    DMLRelearned.logger.info("No valid entries in Trial entity list for Data Model: {}. Using default entity.", container.dataModelID);
-                } else {
-                    DMLRelearned.logger.info("No Trial available for {}", container.getDisplayName());
-                }
+                DMLRelearned.logger.info("No Trial available for {}", container.getDisplayName());
             }
 
             entities = builder.build();
@@ -421,11 +414,11 @@ public class MetadataDataModel extends Metadata {
             return entities.size() > 0;
         }
 
-        public Optional<Entity> getRandomEntity(World world) {
+        public Optional<EntityLiving> getRandomEntity(World world) {
             String entityName = WeightedRandom.getRandomItem(ThreadLocalRandom.current(), entities).getValue();
             ResourceLocation entityResource = new ResourceLocation(entityName);
             Entity entity = EntityList.createEntityByIDFromName(entityResource, world);
-            return (entity != null) ? Optional.of(entity) : Optional.empty();
+            return (entity instanceof EntityLiving) ? Optional.of((EntityLiving) entity) : Optional.empty();
         }
 
         public double getSpawnDelay() {

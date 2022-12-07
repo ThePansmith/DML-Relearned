@@ -1,5 +1,6 @@
 package mustapelto.deepmoblearning.common.util;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -74,6 +75,11 @@ public class NBTHelper {
     public static NBTTagList getTagList(ItemStack stack, String key) {
         NBTTagCompound nbt = getTag(stack);
         return nbt != null ? nbt.getTagList(key, Constants.NBT.TAG_COMPOUND) : new NBTTagList();
+    }
+
+    public static void setTagList(ItemStack stack, String key, NBTTagList list) {
+        NBTTagCompound nbt = getOrCreateTag(stack);
+        nbt.setTag(key, list);
     }
 
     //

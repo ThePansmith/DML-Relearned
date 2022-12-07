@@ -30,6 +30,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @EventBusSubscriber
 public class PlayerEventHandler {
+
     private static final List<UUID> FLYING_PLAYERS = new ArrayList<>();
 
     @SubscribeEvent
