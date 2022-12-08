@@ -1,7 +1,7 @@
 package mustapelto.deepmoblearning.common.trials.affix;
 
+import mustapelto.deepmoblearning.DMLConstants;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,19 +12,32 @@ import net.minecraft.world.storage.WorldInfo;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ThunderDomeAffix implements ITrialAffix {
+public class ThunderDomeAffix extends TrialAffix {
 
-    private final BlockPos pos;
-    private final World world;
     private int ticks = 0;
     private final boolean wasRaining;
     private final boolean wasThundering;
 
+    public ThunderDomeAffix() {
+        super();
+        wasRaining = false;
+        wasThundering = false;
+    }
+
     public ThunderDomeAffix(BlockPos pos, World world) {
-        this.pos = pos;
-        this.world = world;
+        super(pos, world);
         this.wasRaining = world.getWorldInfo().isRaining();
         this.wasThundering = world.getWorldInfo().isThundering();
+    }
+
+    @Override
+    public ThunderDomeAffix copy(BlockPos pos, World world) {
+        return new ThunderDomeAffix(pos, world);
+    }
+
+    @Override
+    public String getId() {
+        return DMLConstants.Trials.Affix.THUNDERDOME;
     }
 
     @Override

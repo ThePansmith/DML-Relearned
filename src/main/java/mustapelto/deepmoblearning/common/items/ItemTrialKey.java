@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import mustapelto.deepmoblearning.client.util.KeyboardHelper;
 import mustapelto.deepmoblearning.common.metadata.MetadataManager;
 import mustapelto.deepmoblearning.common.trials.AttunementData;
-import mustapelto.deepmoblearning.common.trials.affix.ITrialAffix;
+import mustapelto.deepmoblearning.common.trials.affix.TrialAffix;
 import mustapelto.deepmoblearning.common.util.StringHelper;
 import mustapelto.deepmoblearning.common.util.TrialKeyHelper;
 import net.minecraft.client.resources.I18n;
@@ -48,7 +48,7 @@ public class ItemTrialKey extends ItemBase {
                 String tierName = attunementData.getTierDisplayNameFormatted();
                 tooltip.add(I18n.format("deepmoblearning.trial_key.tooltip.tier",tierName));
 
-                ImmutableList<ITrialAffix> affixes = TrialKeyHelper.getAffixes(stack, BlockPos.ORIGIN, worldIn);
+                ImmutableList<TrialAffix> affixes = TrialKeyHelper.getAffixes(stack, BlockPos.ORIGIN, worldIn);
                 if (affixes.isEmpty()) {
                     tooltip.add(I18n.format("deepmoblearning.trial_key.tooltip.affixes_faulty"));
                 } else {

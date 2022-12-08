@@ -6,9 +6,21 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 
-public class KnockbackImmuneAffix implements ITrialAffix {
+public class KnockbackImmuneAffix extends TrialAffix {
+
+    @Override
+    public String getId() {
+        return DMLConstants.Trials.Affix.KNOCKBACK_IMMUNITY;
+    }
+
+    @Override
+    public KnockbackImmuneAffix copy(BlockPos pos, World world) {
+        return new KnockbackImmuneAffix();
+    }
 
     @Override
     public void apply(EntityLiving entity) {

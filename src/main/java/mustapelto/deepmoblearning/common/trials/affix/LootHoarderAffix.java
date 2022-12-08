@@ -18,15 +18,26 @@ import net.minecraft.world.storage.loot.LootTable;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class LootHoarderAffix implements ITrialAffix {
+public class LootHoarderAffix extends TrialAffix {
 
-    private final BlockPos pos;
-    private final World world;
     private int ticks = 0;
 
+    public LootHoarderAffix() {
+        super();
+    }
+
     public LootHoarderAffix(BlockPos pos, World world) {
-        this.pos = pos;
-        this.world = world;
+        super(pos, world);
+    }
+
+    @Override
+    public String getId() {
+        return DMLConstants.Trials.Affix.LOOT_HOARDERS;
+    }
+
+    @Override
+    public LootHoarderAffix copy(BlockPos pos, World world) {
+        return new LootHoarderAffix(pos, world);
     }
 
     @Override

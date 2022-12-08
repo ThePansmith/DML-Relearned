@@ -1,5 +1,6 @@
 package mustapelto.deepmoblearning.common.trials.affix;
 
+import mustapelto.deepmoblearning.DMLConstants;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.Items;
@@ -12,15 +13,26 @@ import net.minecraft.world.World;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RegenPartyAffix implements ITrialAffix {
+public class RegenPartyAffix extends TrialAffix {
 
-    private final BlockPos pos;
-    private final World world;
     private int ticks = 0;
 
+    public RegenPartyAffix() {
+        super();
+    }
+
     public RegenPartyAffix(BlockPos pos, World world) {
-        this.pos = pos;
-        this.world = world;
+        super(pos, world);
+    }
+
+    @Override
+    public String getId() {
+        return DMLConstants.Trials.Affix.REGEN_PARTY;
+    }
+
+    @Override
+    public RegenPartyAffix copy(BlockPos pos, World world) {
+        return new RegenPartyAffix(pos, world);
     }
 
     @Override

@@ -7,6 +7,7 @@ import mustapelto.deepmoblearning.common.capability.CapabilityPlayerTrial;
 import mustapelto.deepmoblearning.common.metadata.MetadataManager;
 import mustapelto.deepmoblearning.common.network.DMLPacketHandler;
 import mustapelto.deepmoblearning.common.patchouli.PatchouliModule;
+import mustapelto.deepmoblearning.common.util.AffixHelper;
 import mustapelto.deepmoblearning.common.util.DMLRHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -63,6 +64,8 @@ public class DMLRelearned
         // Capabilities
         CapabilityPlayerTrial.init();
 
+        // Misc
+        AffixHelper.registerAffixes();
         proxy.registerEntityRenderers();
     }
 

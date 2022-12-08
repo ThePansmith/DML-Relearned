@@ -4,7 +4,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Table;
 import mustapelto.deepmoblearning.common.trials.AttunementData;
-import mustapelto.deepmoblearning.common.trials.affix.ITrialAffix;
+import mustapelto.deepmoblearning.common.trials.affix.TrialAffix;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -50,10 +50,10 @@ public class TrialKeyHelper {
         return (result != null) ? Optional.of(result) : Optional.empty();
     }
 
-    public static ImmutableList<ITrialAffix> getAffixes(ItemStack trialKey, BlockPos pos, World world) {
+    public static ImmutableList<TrialAffix> getAffixes(ItemStack trialKey, BlockPos pos, World world) {
         ImmutableList<String> affixKeys = getAffixList(trialKey);
         return affixKeys.stream()
-                .map(key -> AffixHelper.createAffix(key, pos, world))
+                .map(key -> (TrialAffix) AffixHelper.createAffix(key, pos, world))
                 .collect(ImmutableList.toImmutableList());
     }
 

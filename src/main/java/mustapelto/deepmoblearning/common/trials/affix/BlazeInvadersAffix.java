@@ -1,5 +1,6 @@
 package mustapelto.deepmoblearning.common.trials.affix;
 
+import mustapelto.deepmoblearning.DMLConstants;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.util.math.BlockPos;
@@ -8,15 +9,26 @@ import net.minecraft.world.World;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class BlazeInvadersAffix implements ITrialAffix {
+public class BlazeInvadersAffix extends TrialAffix {
 
-    private final BlockPos pos;
-    private final World world;
     private int ticks = 0;
 
+    public BlazeInvadersAffix() {
+        super();
+    }
+
     public BlazeInvadersAffix(BlockPos pos, World world) {
-        this.pos = pos;
-        this.world = world;
+        super(pos, world);
+    }
+
+    @Override
+    public String getId() {
+        return DMLConstants.Trials.Affix.BLAZE_INVADERS;
+    }
+
+    @Override
+    public BlazeInvadersAffix copy(BlockPos pos, World world) {
+        return new BlazeInvadersAffix(pos, world);
     }
 
     @Override

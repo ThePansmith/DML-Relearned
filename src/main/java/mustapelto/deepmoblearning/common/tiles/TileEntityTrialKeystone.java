@@ -11,7 +11,7 @@ import mustapelto.deepmoblearning.common.inventory.ContainerTrialKeystone;
 import mustapelto.deepmoblearning.common.inventory.ItemHandlerTrialKey;
 import mustapelto.deepmoblearning.common.network.*;
 import mustapelto.deepmoblearning.common.trials.AttunementData;
-import mustapelto.deepmoblearning.common.trials.affix.ITrialAffix;
+import mustapelto.deepmoblearning.common.trials.affix.TrialAffix;
 import mustapelto.deepmoblearning.common.util.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -52,7 +52,7 @@ public class TileEntityTrialKeystone extends TileEntityContainer implements ITic
     private boolean active = false;
     private int ticksToNextWave = 0;
     private long tickCount = 0;
-    private ImmutableList<ITrialAffix> affixes = ImmutableList.of();
+    private ImmutableList<TrialAffix> affixes = ImmutableList.of();
 
     @Override
     public void update() {
@@ -104,7 +104,7 @@ public class TileEntityTrialKeystone extends TileEntityContainer implements ITic
             setDefaultTrialState();
         }
 
-        affixes.forEach(ITrialAffix::run);
+        affixes.forEach(TrialAffix::run);
 
         // Every 14 seconds
         if (tickCount % 280 == 0) spawnGlitch();
@@ -156,7 +156,7 @@ public class TileEntityTrialKeystone extends TileEntityContainer implements ITic
     }
 
     public void stopTrial(boolean abort, boolean sendMessages) {
-        affixes.forEach(ITrialAffix::cleanUp);
+        affixes.forEach(TrialAffix::cleanUp);
         if (!abort) {
             if (sendMessages) {
                 participants.forEach(p -> PlayerHelper.sendMessageToOverlay(p, Trials.Message.TRIAL_COMPLETE));
