@@ -37,7 +37,7 @@ repositories {
 
 dependencies {
     deobfCompile "curse.maven:jei-238222:3040523"
-    compile "curse.maven:patchouli-306770:3162874"
+    deobfCompile "curse.maven:patchouli-306770:3162874"
 
     // compile "com.google.guava:guava:30.1-jre"
 }

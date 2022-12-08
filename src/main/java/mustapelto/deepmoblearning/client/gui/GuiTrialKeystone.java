@@ -1,5 +1,6 @@
 package mustapelto.deepmoblearning.client.gui;
 
+import com.google.common.collect.ImmutableList;
 import mustapelto.deepmoblearning.DMLConstants;
 import mustapelto.deepmoblearning.client.gui.buttons.ButtonBase;
 import mustapelto.deepmoblearning.client.gui.buttons.ButtonItemDisplay;
@@ -8,6 +9,7 @@ import mustapelto.deepmoblearning.common.network.DMLPacketHandler;
 import mustapelto.deepmoblearning.common.network.MessageRequestUpdateTileEntity;
 import mustapelto.deepmoblearning.common.tiles.TileEntityTrialKeystone;
 import mustapelto.deepmoblearning.common.trials.AttunementData;
+import mustapelto.deepmoblearning.common.trials.affix.TrialAffix;
 import mustapelto.deepmoblearning.common.util.Point;
 import mustapelto.deepmoblearning.common.util.Rect;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,7 +20,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ import static mustapelto.deepmoblearning.DMLConstants.Gui.ROW_SPACING;
 import static mustapelto.deepmoblearning.DMLConstants.Gui.TrialKeystone.*;
 import static mustapelto.deepmoblearning.DMLConstants.Gui.Colors;
 
-public class GuiTrialKeystone extends GuiContainerBase {
+public class GuiTrialKeystone extends GuiContainerTickable {
 
     // TEXTURE
     private static final ResourceLocation TEXTURE = new ResourceLocation(DMLConstants.ModInfo.ID, "textures/gui/trial_keystone.png");
@@ -58,10 +59,11 @@ public class GuiTrialKeystone extends GuiContainerBase {
     private static final int WAVES_OFFSET_X = 35;
 
     // STATE VARIABLES
-    private ButtonStartTrial startTrialButton;
+
     private final TileEntityTrialKeystone trialKeystone;
-    @Nullable
-    private AttunementData attunementData;
+    private AttunementData attunementData; // todo remove
+
+    private ButtonStartTrial startTrialButton;
     private final List<ButtonItemDisplay> rewardItemDisplay = new ArrayList<>();
     private final List<String> errorStrings = new ArrayList<>();
     private boolean hasError;
@@ -71,16 +73,21 @@ public class GuiTrialKeystone extends GuiContainerBase {
     //
 
     public GuiTrialKeystone(TileEntityTrialKeystone tileEntity, EntityPlayer player, World world) {
-        super(player, world, tileEntity.getContainer(player.inventory), WIDTH, HEIGHT);
+        super(tileEntity, player, world, WIDTH, HEIGHT);
         this.trialKeystone = tileEntity;
     }
 
-    @Override
-    public void initGui() {
-        super.initGui();
-        DMLPacketHandler.sendToServer(new MessageRequestUpdateTileEntity(trialKeystone));
+    // todo remove
+    private void getAttunementData() {
         attunementData = trialKeystone.getTrialData();
     }
+
+    //@Override
+    //public void initGui() {
+    //    super.initGui();
+    //    DMLPacketHandler.sendToServer(new MessageRequestUpdateTileEntity(trialKeystone));
+    //    getAttunementData();
+    //}
 
     //
     // BUTTONS
@@ -96,6 +103,7 @@ public class GuiTrialKeystone extends GuiContainerBase {
     protected void rebuildButtonList() {
         super.rebuildButtonList();
         buttonList.add(startTrialButton);
+        getAttunementData();
         rebuildRewardButtons();
         buttonList.addAll(rewardItemDisplay);
     }
@@ -110,9 +118,8 @@ public class GuiTrialKeystone extends GuiContainerBase {
 
     private void rebuildRewardButtons() {
         rewardItemDisplay.clear();
-
-        if (hasError || attunementData == null)
-            return;
+        getAttunementData();
+        if (hasError || attunementData == null) return;
 
         List<ItemStack> rewards = attunementData.getRewards();
 
@@ -134,7 +141,7 @@ public class GuiTrialKeystone extends GuiContainerBase {
     @Override
     public void updateScreen() {
         AttunementData oldAttunementData = attunementData;
-        attunementData = trialKeystone.getTrialData();
+        getAttunementData();
 
         if (attunementData != oldAttunementData)
             buttonListNeedsRebuild = true;
@@ -153,7 +160,7 @@ public class GuiTrialKeystone extends GuiContainerBase {
             errorStrings.add(I18n.format("deepmoblearning.trial_keystone.area_blocked_3"));
             errorStrings.add(I18n.format("deepmoblearning.trial_keystone.area_blocked_4"));
             errorStrings.add(I18n.format("deepmoblearning.trial_keystone.area_blocked_5"));
-        } else if (!trialKeystone.hasTrialKey()) {
+        } else if (!trialKeystone.hasTrialKeyInInventory()) {
             errorStrings.add(I18n.format("deepmoblearning.trial_keystone.no_trial_key_1"));
             errorStrings.add(I18n.format("deepmoblearning.trial_keystone.no_trial_key_2"));
         } else
@@ -162,6 +169,7 @@ public class GuiTrialKeystone extends GuiContainerBase {
         if (attunementData == null || hasError) {
             startTrialButton.visible = false;
             startTrialButton.enabled = false;
+            buttonListNeedsRebuild = true;
         } else {
             startTrialButton.visible = true;
             startTrialButton.enabled = true;
@@ -228,6 +236,7 @@ public class GuiTrialKeystone extends GuiContainerBase {
             return;
         }
 
+        getAttunementData();
         if (attunementData == null)
             return;
 
@@ -258,7 +267,27 @@ public class GuiTrialKeystone extends GuiContainerBase {
                 Colors.WHITE
         );
 
-        //TODO: Affixes
+        // TODO Restrict this list to 4 (max screen size), or somehow be able to display more than 5 affixes
+        ImmutableList<TrialAffix> affixes = trialKeystone.getAffixes();
+        if (!affixes.isEmpty()) {
+            drawString(
+                    fontRenderer,
+                    I18n.format("deepmoblearning.trial_keystone.affixes"),
+                    guiLeft + TRIAL_INFO_TEXT_LEFT.X,
+                    guiTop + TRIAL_INFO_TEXT_LEFT.Y + (ROW_SPACING * 2),
+                    Colors.AQUA
+            );
+            for (int i = 0; i < affixes.size(); i++) {
+                TrialAffix affix = affixes.get(i);
+                drawString(
+                        fontRenderer,
+                        affix.getAffixName(),
+                        guiLeft + TRIAL_INFO_TEXT_LEFT.X,
+                        guiTop + TRIAL_INFO_TEXT_LEFT.Y + (ROW_SPACING * (3 + i)),
+                        Colors.WHITE
+                );
+            }
+        }
 
         drawString(
                 fontRenderer,

@@ -10,7 +10,8 @@ import mustapelto.deepmoblearning.common.util.Rect;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-public abstract class GuiMachine extends GuiContainerBase {
+public abstract class GuiMachine extends GuiContainerTickable {
+
     protected final TileEntityMachine tileEntity;
     private final Point redstoneModeButtonLocation;
     private ButtonRedstoneMode redstoneModeButton;
@@ -25,21 +26,9 @@ public abstract class GuiMachine extends GuiContainerBase {
                       int width,
                       int height,
                       Point redstoneModeButtonLocation) {
-        super(player, world, tileEntity.getContainer(player.inventory), width, height);
+        super(tileEntity, player, world, width, height);
         this.tileEntity = tileEntity;
         this.redstoneModeButtonLocation = redstoneModeButtonLocation;
-    }
-
-    @Override
-    public void initGui() {
-        super.initGui();
-        tileEntity.setGuiOpen(true);
-    }
-
-    @Override
-    public void onGuiClosed() {
-        tileEntity.setGuiOpen(false);
-        super.onGuiClosed();
     }
 
     //

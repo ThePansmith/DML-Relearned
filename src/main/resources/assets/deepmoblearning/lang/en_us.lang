@@ -24,6 +24,14 @@ tile.deepmoblearning.simulation_chamber.name=Simulation Chamber
 tile.deepmoblearning.extraction_chamber.name=Loot Fabricator
 tile.deepmoblearning.trial_keystone.name=Trial Keystone
 
+# Entity Names
+entity.deepmoblearning.glitch.name=System Glitch
+entity.deepmoblearning.glitch_orb.name=Orb of the suffering AI
+entity.deepmoblearning.trial_enderman.name=Trial Enderman
+entity.deepmoblearning.trial_spider.name=Trial Spider
+entity.deepmoblearning.trial_cave_spider.name=Trial Cave Spider
+entity.deepmoblearning.trial_slime.name=Trial Slime
+
 # General
 deepmoblearning.general.more_info=- hold %s for more info
 

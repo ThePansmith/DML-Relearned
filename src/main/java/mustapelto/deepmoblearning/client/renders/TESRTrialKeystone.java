@@ -16,7 +16,7 @@ public class TESRTrialKeystone extends TileEntitySpecialRenderer<TileEntityTrial
 
     @Override
     public void render(TileEntityTrialKeystone te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        ItemStack stack = te.getTrialKey();
+        ItemStack stack = te.getTrialKeyFromInventory();
         if (!stack.isEmpty()) {
             Minecraft.getMinecraft().entityRenderer.disableLightmap();
             GlStateManager.enableRescaleNormal();

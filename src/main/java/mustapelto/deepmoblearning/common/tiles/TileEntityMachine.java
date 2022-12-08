@@ -5,16 +5,14 @@ import mustapelto.deepmoblearning.common.energy.DMLEnergyStorage;
 import mustapelto.deepmoblearning.common.network.DMLPacketHandler;
 import mustapelto.deepmoblearning.common.network.MessageCraftingState;
 import mustapelto.deepmoblearning.common.util.NBTHelper;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 
 import javax.annotation.Nullable;
 
-public abstract class TileEntityMachine extends TileEntityContainer implements ITickable {
+public abstract class TileEntityMachine extends TileEntityTickable {
     // Energy
     protected final DMLEnergyStorage energyStorage;
 
@@ -27,9 +25,6 @@ public abstract class TileEntityMachine extends TileEntityContainer implements I
     private CraftingState craftingState = CraftingState.IDLE;
     protected boolean crafting = false;
     protected int craftingProgress = 0;
-
-    // UI
-    private boolean guiOpen = false;
 
     public TileEntityMachine(int energyCapacity, int energyMaxReceive) {
         energyStorage = new DMLEnergyStorage(energyCapacity, energyMaxReceive) {
@@ -46,11 +41,7 @@ public abstract class TileEntityMachine extends TileEntityContainer implements I
 
     @Override
     public void update() {
-        if (world.isRemote) {
-            if (guiOpen)
-                requestUpdatePacketFromServer();
-            return;
-        }
+        super.update();
 
         if (!crafting && canStartCrafting()) {
             startCrafting();
@@ -168,14 +159,6 @@ public abstract class TileEntityMachine extends TileEntityContainer implements I
     }
 
     //
-    // GUI
-    //
-
-    public void setGuiOpen(boolean open) {
-        this.guiOpen = open;
-    }
-
-    //
     // Capabilities
     //
 
@@ -248,11 +231,6 @@ public abstract class TileEntityMachine extends TileEntityContainer implements I
             else
                 sendBlockUpdate();
         }
-    }
-
-    private void sendBlockUpdate() {
-        IBlockState state = world.getBlockState(pos);
-        world.notifyBlockUpdate(pos, state, state, 3);
     }
 
     //

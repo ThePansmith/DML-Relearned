@@ -85,6 +85,22 @@ public class TrialKeyHelper {
         return 0;
     }
 
+    public static ImmutableList<ItemStack> getRewards(ItemStack stack) {
+        AttunementData data = getAttunement(stack).orElse(null);
+        if (data != null) {
+            return data.getRewards();
+        }
+        return ImmutableList.of();
+    }
+
+    public static String getMobName(ItemStack stack) {
+        AttunementData data = getAttunement(stack).orElse(null);
+        if (data != null) {
+            return data.getMobDisplayName();
+        }
+        return "";
+    }
+
     private static Optional<String> getAttunementString(ItemStack trialKey) {
         if (!ItemStackHelper.isTrialKey(trialKey))
             return Optional.empty();

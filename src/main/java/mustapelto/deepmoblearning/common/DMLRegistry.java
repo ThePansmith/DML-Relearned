@@ -148,7 +148,7 @@ public class DMLRegistry {
         EntityEntry entityGlitch = EntityEntryBuilder.create()
                 .entity(EntityGlitch.class)
                 .id(entityGlitchName, entityId++)
-                .name(entityGlitchName.getPath())
+                .name(DMLConstants.ModInfo.ID + "." + entityGlitchName.getPath())
                 .tracker(64, 1, true)
                 .egg(0, DMLConstants.Gui.Colors.AQUA)
                 .build();
@@ -156,35 +156,35 @@ public class DMLRegistry {
         EntityEntry entityGlitchOrb = EntityEntryBuilder.create()
                 .entity(EntityGlitchOrb.class)
                 .id(entityGlitchOrbName, entityId++)
-                .name(entityGlitchOrbName.getPath())
+                .name(DMLConstants.ModInfo.ID + "." + entityGlitchOrbName.getPath())
                 .tracker(64, 1, true)
                 .build();
 
         EntityEntry entityTrialEnderman = EntityEntryBuilder.create()
                 .entity(EntityTrialEnderman.class)
                 .id(entityTrialEndermanName, entityId++)
-                .name(entityTrialEndermanName.getPath())
+                .name(DMLConstants.ModInfo.ID + "." + entityTrialEndermanName.getPath())
                 .tracker(64, 1, true)
                 .build();
 
         EntityEntry entityTrialSpider = EntityEntryBuilder.create()
                 .entity(EntityTrialSpider.class)
                 .id(entityTrialSpiderName, entityId++)
-                .name(entityTrialSpiderName.getPath())
+                .name(DMLConstants.ModInfo.ID + "." + entityTrialSpiderName.getPath())
                 .tracker(64, 1, true)
                 .build();
 
         EntityEntry entityTrialCaveSpider = EntityEntryBuilder.create()
                 .entity(EntityTrialCaveSpider.class)
                 .id(entityTrialCaveSpiderName, entityId++)
-                .name(entityTrialCaveSpiderName.getPath())
+                .name(DMLConstants.ModInfo.ID + "." + entityTrialCaveSpiderName.getPath())
                 .tracker(64, 1, true)
                 .build();
 
         EntityEntry entityTrialSlime = EntityEntryBuilder.create()
                 .entity(EntityTrialSlime.class)
                 .id(entityTrialSlimeName, entityId++)
-                .name(entityTrialSlimeName.getPath())
+                .name(DMLConstants.ModInfo.ID + "." + entityTrialSlimeName.getPath())
                 .tracker(64, 1, true)
                 .build();
 

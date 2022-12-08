@@ -29,7 +29,7 @@ public class DMLPacketHandler {
     }
 
     public static void sendToClient(IMessage message, World world, BlockPos pos) {
-        network.sendToAllTracking(message, new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 0));
+        network.sendToAllTracking(message, new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 10));
     }
 
     public static void sendToServer(IMessage message) {
