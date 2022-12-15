@@ -12,9 +12,9 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 // apply plugin: 'org.spongepowered.mixin'
 
-version = '1.12.2-0.8.1-beta'
+version = '1.0.0'
 group = 'mustapelto.dml-relearned'
-archivesBaseName = 'dml-relearned'
+archivesBaseName = 'DeepMobEvolution'
 
 sourceCompatibility = targetCompatibility = '1.8'
 compileJava {

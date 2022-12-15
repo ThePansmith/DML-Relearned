@@ -414,9 +414,10 @@ public class TrialHandler {
         compound.setBoolean(NBT_IS_ACTIVE, active);
         compound.setInteger(NBT_CURRENT_WAVE, currentWave);
         compound.setInteger(NBT_MOBS_DEFEATED, mobsDefeated);
-
-        NBTTagCompound trialKey = activeTrialKey.writeToNBT(new NBTTagCompound());
-        compound.setTag(NBT_ACTIVE_TRIAL_KEY, trialKey);
+        if (activeTrialKey != null) {
+            NBTTagCompound trialKey = activeTrialKey.writeToNBT(new NBTTagCompound());
+            compound.setTag(NBT_ACTIVE_TRIAL_KEY, trialKey);
+        }
     }
 
     protected void readFromNBT(NBTTagCompound compound) {
