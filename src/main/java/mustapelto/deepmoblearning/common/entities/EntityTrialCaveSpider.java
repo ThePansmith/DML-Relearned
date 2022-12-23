@@ -21,7 +21,7 @@ public class EntityTrialCaveSpider extends EntityCaveSpider {
         tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.8D));
         tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         tasks.addTask(6, new EntityAILookIdle(this));
-        targetTasks.addTask(0, new EntityAIFindEntityNearestPlayer(this));
+        targetTasks.addTask(0, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false));
     }
 
     static class AISpiderAttack extends EntityAIAttackMelee {
