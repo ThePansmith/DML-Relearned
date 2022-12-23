@@ -33,7 +33,7 @@ public class TrialHandler {
     private final TileEntityTrialKeystone te;
     private final Set<EntityPlayerMP> participants = Collections.newSetFromMap(new WeakHashMap<>());
 
-    private ItemStack activeTrialKey;
+    private ItemStack activeTrialKey = ItemStack.EMPTY;
     private boolean active;
     private int currentWave;
     private int mobsDefeated;
@@ -208,13 +208,13 @@ public class TrialHandler {
         int randomZ = getPos().getZ() + rand.nextInt(-5, 5);
 
         // TODO based on tier??
-        if(rand.nextInt(1, 100) <= getGlitchChance()) {
+        if (rand.nextInt(1, 100) <= getGlitchChance()) {
             EntityGlitch e = new EntityGlitch(getWorld());
             e.setLocationAndAngles(randomX, randomY, randomZ, 0, 0);
             e.enablePersistence();
 
             EntityPlayer target = e.world.getNearestAttackablePlayer(e.getPosition(), 32, 5);
-            if(target != null  && target.isEntityAlive()) {
+            if (target != null && target.isEntityAlive()) {
                 e.setAttackTarget(target);
             }
 
@@ -238,7 +238,7 @@ public class TrialHandler {
 
         // Check if layer below Trial area is "ground"
         Iterable<BlockPos> groundLayer = BlockPos.getAllInBox(areaMinX, groundY, areaMinZ, areaMaxX, groundY, areaMaxZ);
-        for(BlockPos blockPos : groundLayer) {
+        for (BlockPos blockPos : groundLayer) {
             if (!getWorld().getBlockState(blockPos).isFullBlock())
                 return false;
         }
