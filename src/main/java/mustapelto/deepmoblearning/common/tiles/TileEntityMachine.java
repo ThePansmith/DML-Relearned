@@ -43,6 +43,10 @@ public abstract class TileEntityMachine extends TileEntityTickable {
     public void update() {
         super.update();
 
+        if (this.getWorld().isRemote) {
+            return;
+        }
+
         if (!crafting && canStartCrafting()) {
             startCrafting();
         }

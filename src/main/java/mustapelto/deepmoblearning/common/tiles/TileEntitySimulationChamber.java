@@ -56,7 +56,12 @@ public class TileEntitySimulationChamber extends TileEntityMachine {
 
     @Override
     protected boolean canStartCrafting() {
-        return super.canStartCrafting() && hasDataModel() && hasPolymerClay() && canDataModelSimulate() && !isLivingMatterOutputFull() && !isPristineMatterOutputFull();
+        return super.canStartCrafting() && hasPolymerClay() && canContinueCrafting();
+    }
+
+    @Override
+    protected boolean canContinueCrafting() {
+        return super.canContinueCrafting() && hasDataModel() && canDataModelSimulate() && !isLivingMatterOutputFull() && !isPristineMatterOutputFull();
     }
 
     @Override
@@ -104,7 +109,7 @@ public class TileEntitySimulationChamber extends TileEntityMachine {
     protected CraftingState updateCraftingState() {
         if (!hasDataModel())
             return CraftingState.IDLE;
-        else if (!canStartCrafting() || !canContinueCrafting())
+        else if (!canContinueCrafting() || (!this.isCrafting() && !canStartCrafting()))
             return CraftingState.ERROR;
 
         return CraftingState.RUNNING;
@@ -155,7 +160,7 @@ public class TileEntitySimulationChamber extends TileEntityMachine {
         if (livingMatterStack.isEmpty())
             return false;
 
-        boolean stackIsFull = (livingMatterStack.getCount() == outputLiving.getSlotLimit(0));
+        boolean stackIsFull = (livingMatterStack.getCount() >= outputLiving.getSlotLimit(0));
         boolean stackMatchesDataModel = DataModelHelper.getDataModelMatchesLivingMatter(getDataModel(), livingMatterStack);
 
         return (stackIsFull || !stackMatchesDataModel);
@@ -167,7 +172,7 @@ public class TileEntitySimulationChamber extends TileEntityMachine {
         if (pristineMatterStack.isEmpty())
             return false;
 
-        boolean stackIsFull = (pristineMatterStack.getCount() == outputPristine.getSlotLimit(0));
+        boolean stackIsFull = (pristineMatterStack.getCount() >= outputPristine.getSlotLimit(0));
         boolean stackMatchesDataModel = DataModelHelper.getDataModelMatchesPristineMatter(getDataModel(), pristineMatterStack);
 
         return (stackIsFull || !stackMatchesDataModel);
