@@ -2,16 +2,22 @@ package mustapelto.deepmoblearning.common.tiles;
 
 import io.netty.buffer.ByteBuf;
 import mustapelto.deepmoblearning.DMLConstants;
+import mustapelto.deepmoblearning.client.gui.GuiContainerBase;
+import mustapelto.deepmoblearning.client.gui.GuiSimulationChamber;
 import mustapelto.deepmoblearning.common.DMLConfig;
 import mustapelto.deepmoblearning.common.inventory.*;
 import mustapelto.deepmoblearning.common.util.DataModelHelper;
 import mustapelto.deepmoblearning.common.util.ItemStackHelper;
 import mustapelto.deepmoblearning.common.util.NBTHelper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
@@ -123,6 +129,12 @@ public class TileEntitySimulationChamber extends TileEntityMachine {
     @Override
     public ContainerTileEntity getContainer(InventoryPlayer inventoryPlayer) {
         return new ContainerSimulationChamber(this, inventoryPlayer);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public GuiContainerBase getGui(EntityPlayer player, World world) {
+        return new GuiSimulationChamber(this, player, world);
     }
 
     /**

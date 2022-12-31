@@ -2,6 +2,8 @@ package mustapelto.deepmoblearning.common.tiles;
 
 import com.google.common.collect.ImmutableList;
 import io.netty.buffer.ByteBuf;
+import mustapelto.deepmoblearning.client.gui.GuiContainerBase;
+import mustapelto.deepmoblearning.client.gui.GuiTrialKeystone;
 import mustapelto.deepmoblearning.common.inventory.ContainerTileEntity;
 import mustapelto.deepmoblearning.common.inventory.ContainerTrialKeystone;
 import mustapelto.deepmoblearning.common.inventory.ItemHandlerTrialKey;
@@ -10,13 +12,17 @@ import mustapelto.deepmoblearning.common.trials.AttunementData;
 import mustapelto.deepmoblearning.common.trials.affix.TrialAffix;
 import mustapelto.deepmoblearning.common.util.ItemStackHelper;
 import mustapelto.deepmoblearning.common.util.TrialKeyHelper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nullable;
@@ -128,6 +134,12 @@ public class TileEntityTrialKeystone extends TileEntityTickable {
     @Override
     public ContainerTileEntity getContainer(InventoryPlayer inventoryPlayer) {
         return new ContainerTrialKeystone(this, inventoryPlayer);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public GuiContainerBase getGui(EntityPlayer player, World world) {
+        return new GuiTrialKeystone(this, player, world);
     }
 
     public ItemStack getTrialKeyFromInventory() {
