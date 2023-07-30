@@ -7,10 +7,10 @@ import net.minecraft.util.ResourceLocation;
 
 public class DMLConstants {
     public static final class ModInfo {
-        public static final String ID = "deepmoblearning";
-        public static final String NAME = "DeepMobEvolution";
-        public static final String VERSION = "1.0.0";
-        public static final String CONFIG_PATH = "deepmobevolution";
+        public static final String ID = Tags.MODID;
+        public static final String NAME = Tags.MODNAME;
+        public static final String VERSION = Tags.VERSION;
+        public static final String CONFIG_PATH = Tags.MODID;
     }
 
     public static final String MINECRAFT = "minecraft";

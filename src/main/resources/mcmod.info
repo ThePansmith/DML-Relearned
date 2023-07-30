@@ -1,13 +1,13 @@
 [
 {
-  "modid": "deepmoblearning",
-  "name": "Deep Mob Evolution",
+  "modid": "${modid}",
+  "name": "${modname}",
   "description": "Server-friendly virtual mob farming. A continuation of mustapelto's rewrite of xt9's mod.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "https://github.com/ThePansmith/DeepMobEvolution",
   "updateUrl": "",
-  "authorList": ["Pansmith","Dan"],
+  "authorList": ["Pansmith", "serenibyss"],
   "logoFile": "assets/deepmoblearning/logo.png",
   "screenshots": [],
   "dependencies": []
