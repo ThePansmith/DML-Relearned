@@ -1,4 +1,4 @@
-//version: 1690652402
+//version: 1690767571
 /*
  * DO NOT CHANGE THIS FILE!
  * Also, you may replace this file at any time if there is an update available.
@@ -304,9 +304,9 @@ minecraft {
     extraRunJvmArguments.add("-ea:${modGroup}")
     if (usesMixins.toBoolean()) {
         extraRunJvmArguments.addAll([
-                '-Dmixin.hotSwap=true',
-                '-Dmixin.checks.interfaces=true',
-                '-Dmixin.debug.export=true'
+            '-Dmixin.hotSwap=true',
+            '-Dmixin.checks.interfaces=true',
+            '-Dmixin.debug.export=true'
         ])
     }
 
@@ -471,7 +471,7 @@ dependencies {
 
     compileOnlyApi 'org.jetbrains:annotations:23.0.0'
     annotationProcessor 'org.jetbrains:annotations:23.0.0'
-    patchedMinecraft('net.minecraft:launchwrapper:1.17.1') {
+    patchedMinecraft('net.minecraft:launchwrapper:1.17.2') {
         transitive = false
     }
 
