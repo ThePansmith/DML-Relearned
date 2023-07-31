@@ -44,14 +44,12 @@ public class MessageCraftingState implements IMessage {
         @Override
         @Nullable
         public IMessage onMessage(MessageCraftingState message, MessageContext ctx) {
-            Minecraft mc = Minecraft.getMinecraft();
-            mc.addScheduledTask(() -> {
-                TileEntityMachine te = (TileEntityMachine) mc.world.getTileEntity(message.pos);
+            return DMLPacketHandler.handleMessageClient(ctx, () -> {
+                TileEntityMachine te = (TileEntityMachine) Minecraft.getMinecraft().world.getTileEntity(message.pos);
                 if (te != null) {
                     te.setCraftingState(message.craftingState);
                 }
             });
-            return null;
         }
     }
 }

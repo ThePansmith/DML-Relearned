@@ -41,9 +41,9 @@ public class MessageLivingMatterConsume implements IMessage {
             ItemStack offHand = player.getHeldItemOffhand();
 
             if (ItemStackHelper.isLivingMatter(mainHand)) {
-                player.getServerWorld().addScheduledTask(() -> consumeMatter(mainHand, message.consumeStack, player));
+                DMLPacketHandler.handleMessageServer(ctx, () -> consumeMatter(mainHand, message.consumeStack, player));
             } else if (ItemStackHelper.isLivingMatter(offHand)) {
-                player.getServerWorld().addScheduledTask(() -> consumeMatter(offHand, message.consumeStack, player));
+                DMLPacketHandler.handleMessageServer(ctx, () -> consumeMatter(offHand, message.consumeStack, player));
             }
 
             return null;

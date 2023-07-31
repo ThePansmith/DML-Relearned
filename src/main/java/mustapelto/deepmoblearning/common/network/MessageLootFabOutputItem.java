@@ -49,13 +49,12 @@ public class MessageLootFabOutputItem implements IMessage {
         @Nullable
         public IMessage onMessage(MessageLootFabOutputItem message, MessageContext ctx) {
             WorldServer world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(message.dimension);
-            world.addScheduledTask(() -> {
+            return DMLPacketHandler.handleMessageServer(ctx, () -> {
                 TileEntityLootFabricator te = (TileEntityLootFabricator) world.getTileEntity(message.pos);
                 if (te != null) {
                     te.setOutputItem(message.outputItem);
                 }
             });
-            return null;
         }
     }
 }

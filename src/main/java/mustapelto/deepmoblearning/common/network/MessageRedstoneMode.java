@@ -48,13 +48,12 @@ public class MessageRedstoneMode implements IMessage {
         @Nullable
         public IMessage onMessage(MessageRedstoneMode message, MessageContext ctx) {
             WorldServer world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(message.dimension);
-            world.addScheduledTask(() -> {
+            return DMLPacketHandler.handleMessageServer(ctx, () -> {
                 TileEntityMachine te = (TileEntityMachine) world.getTileEntity(message.pos);
                 if (te != null) {
                     te.setRedstoneMode(message.redstoneMode);
                 }
             });
-            return null;
         }
     }
 }

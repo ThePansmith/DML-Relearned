@@ -47,13 +47,12 @@ public class MessageTrialStart implements IMessage {
         @Override
         public IMessage onMessage(MessageTrialStart message, MessageContext ctx) {
             WorldServer world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(message.dimension);
-            world.addScheduledTask(() -> {
+            return DMLPacketHandler.handleMessageServer(ctx, () -> {
                 TileEntityTrialKeystone te = (TileEntityTrialKeystone) world.getTileEntity(message.pos);
                 if (te != null) {
                     te.startTrial();
                 }
             });
-            return null;
         }
     }
 }

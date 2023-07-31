@@ -37,7 +37,7 @@ public class MessageLevelUpModel implements IMessage {
             EntityPlayerMP player = ctx.getServerHandler().player;
 
             if (ItemStackHelper.isCreativeModelLearner(player.getHeldItemMainhand()) || ItemStackHelper.isCreativeModelLearner(player.getHeldItemOffhand())) {
-                player.getServerWorld().addScheduledTask(() -> {
+                DMLPacketHandler.handleMessageServer(ctx, () -> {
                     DataModelHelper.findAndLevelUpModels(player.inventory.mainInventory, player, message.increaseTier);
                     DataModelHelper.findAndLevelUpModels(player.inventory.offHandInventory, player, message.increaseTier);
                 });

@@ -1,14 +1,22 @@
 package mustapelto.deepmoblearning.common.network;
 
 import mustapelto.deepmoblearning.DMLConstants;
+import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.NetHandlerPlayServer;
+import net.minecraft.util.IThreadListener;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 @EventBusSubscriber
 public class DMLPacketHandler {
@@ -38,5 +46,30 @@ public class DMLPacketHandler {
 
     public static void sendToClientPlayer(IMessage message, EntityPlayerMP player) {
         network.sendTo(message, player);
+    }
+
+    @Nullable
+    public static IMessage handleMessageServer(MessageContext ctx, Runnable executor) {
+        NetHandlerPlayServer handler = ctx.getServerHandler();
+        IThreadListener listener = FMLCommonHandler.instance().getWorldThread(handler);
+        if (listener.isCallingFromMinecraftThread()) {
+            executor.run();
+        } else {
+            listener.addScheduledTask(executor);
+        }
+        return null;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Nullable
+    public static IMessage handleMessageClient(MessageContext ctx, Runnable executor) {
+        NetHandlerPlayClient handler = ctx.getClientHandler();
+        IThreadListener listener = FMLCommonHandler.instance().getWorldThread(handler);
+        if (listener.isCallingFromMinecraftThread()) {
+            executor.run();
+        } else {
+            listener.addScheduledTask(executor);
+        }
+        return null;
     }
 }

@@ -37,14 +37,13 @@ public class MessageUpdateTileEntity implements IMessage {
         @Override
         @Nullable
         public IMessage onMessage(MessageUpdateTileEntity message, MessageContext ctx) {
-            Minecraft.getMinecraft().addScheduledTask(() -> {
+            return DMLPacketHandler.handleMessageClient(ctx, () -> {
                 BlockPos pos = BlockPos.fromLong(message.payload.readLong());
                 TileEntityBase te = (TileEntityBase) Minecraft.getMinecraft().world.getTileEntity(pos);
                 if (te != null) {
                     te.handleUpdateData(message.payload);
                 }
             });
-            return null;
         }
     }
 }
