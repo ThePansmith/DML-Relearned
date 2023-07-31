@@ -3,6 +3,8 @@ package mustapelto.deepmoblearning.common.util;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Table;
+import mustapelto.deepmoblearning.common.DMLRegistry;
+import mustapelto.deepmoblearning.common.metadata.MetadataDataModel;
 import mustapelto.deepmoblearning.common.trials.AttunementData;
 import mustapelto.deepmoblearning.common.trials.affix.TrialAffix;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -36,6 +38,13 @@ public class TrialKeyHelper {
 
     public static boolean isAttuned(ItemStack trialKey) {
         return getAttunement(trialKey).isPresent();
+    }
+
+    public static ItemStack createAttunedKey(MetadataDataModel dataModel, int tier) {
+        ItemStack trialKey = new ItemStack(DMLRegistry.ITEM_TRIAL_KEY);
+        NBTHelper.setString(trialKey, NBT_ATTUNEMENT, dataModel.getID());
+        NBTHelper.setInteger(trialKey, NBT_TIER, tier);
+        return trialKey;
     }
 
     public static Optional<AttunementData> getAttunement(ItemStack trialKey) {
