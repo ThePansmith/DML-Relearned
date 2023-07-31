@@ -79,7 +79,7 @@ public class ItemDataModel extends ItemBase {
 
             boolean canSimulate = DataModelHelper.canSimulate(stack);
             if (!canSimulate) {
-                tooltip.add(TextFormatting.RESET + "" + TextFormatting.RED + I18n.format("deepmoblearning.data_model.cannot_simulate") + TextFormatting.RESET);
+                tooltip.add(TextFormatting.RESET.toString() + TextFormatting.RED + I18n.format("deepmoblearning.data_model.cannot_simulate") + TextFormatting.RESET);
             }
         }
     }

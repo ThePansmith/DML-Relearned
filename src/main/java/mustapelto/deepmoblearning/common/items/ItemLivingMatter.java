@@ -1,5 +1,6 @@
 package mustapelto.deepmoblearning.common.items;
 
+import mustapelto.deepmoblearning.DMLRelearned;
 import mustapelto.deepmoblearning.client.util.KeyboardHelper;
 import mustapelto.deepmoblearning.common.metadata.MetadataLivingMatter;
 import mustapelto.deepmoblearning.common.network.DMLPacketHandler;
@@ -15,7 +16,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -59,9 +59,6 @@ public class ItemLivingMatter extends ItemBase {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        if (FMLCommonHandler.instance().getSide() == Side.SERVER)
-            return super.getItemStackDisplayName(stack); // Can't do localization on server side
-
-        return I18n.format("deepmoblearning.living_matter.display_name", metadata.getDisplayNameFormatted());
+        return DMLRelearned.proxy.getLocalizedString("deepmoblearning.living_matter.display_name", metadata.getDisplayNameFormatted());
     }
 }

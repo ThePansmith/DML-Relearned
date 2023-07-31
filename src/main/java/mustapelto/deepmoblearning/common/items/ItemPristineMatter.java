@@ -1,5 +1,6 @@
 package mustapelto.deepmoblearning.common.items;
 
+import mustapelto.deepmoblearning.DMLRelearned;
 import mustapelto.deepmoblearning.common.metadata.MetadataDataModel;
 import mustapelto.deepmoblearning.common.util.DMLRHelper;
 import mustapelto.deepmoblearning.common.util.ItemStackHelper;
@@ -8,7 +9,6 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -31,10 +31,7 @@ public class ItemPristineMatter extends ItemBase {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        if (FMLCommonHandler.instance().getSide() == Side.SERVER)
-            return super.getItemStackDisplayName(stack); // Can't do localization on server side
-
-        return I18n.format("deepmoblearning.pristine_matter.display_name", metadata.getDisplayName());
+        return DMLRelearned.proxy.getLocalizedString("deepmoblearning.pristine_matter.display_name", metadata.getDisplayName());
     }
 
     @Override
