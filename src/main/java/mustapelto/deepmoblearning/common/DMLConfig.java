@@ -31,17 +31,17 @@ public class DMLConfig {
     public static class MachineSettings {
         @Name("Simulation Chamber Processing Time")
         @Comment("Time it takes for the Simulation Chamber to run one iteration (in ticks)")
-        @RangeInt(min = 1, max = 1200)
+        @RangeInt(min = 1)
         public int SIMULATION_CHAMBER_PROCESSING_TIME = 301;
 
         @Name("Loot Fabricator RF Cost")
         @Comment("Energy cost of Loot Fabricator in RF/t")
-        @RangeInt(min = 0, max = DMLConstants.LootFabricator.ENERGY_IN_MAX)
+        @RangeInt(min = 0)
         public int LOOT_FABRICATOR_RF_COST = 256;
 
         @Name("Loot Fabricator Processing Time")
         @Comment("Time it takes for the Loot Fabricator to process one item (in ticks)")
-        @RangeInt(min = 1, max = 1200)
+        @RangeInt(min = 1)
         public int LOOT_FABRICATOR_PROCESSING_TIME = 51;
 
         @Name("Legacy Machine Sidedness")

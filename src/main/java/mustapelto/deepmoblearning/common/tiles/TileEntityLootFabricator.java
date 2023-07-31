@@ -42,7 +42,19 @@ public class TileEntityLootFabricator extends TileEntityMachine {
     private ItemStack outputItem = ItemStack.EMPTY;
 
     public TileEntityLootFabricator() {
-        super(DMLConstants.LootFabricator.ENERGY_CAPACITY, DMLConstants.LootFabricator.ENERGY_IN_MAX);
+        super(getEnergyCapacity(), getEnergyPerTick());
+    }
+
+    private static int getEnergyCapacity() {
+        int energyCost = DMLConfig.MACHINE_SETTINGS.LOOT_FABRICATOR_RF_COST;
+        long energyCapacity = 1_000_000L * (energyCost / 100); // 1mil * the hundreds place of the RF/t
+        return (int) Math.min(energyCapacity, Integer.MAX_VALUE);
+    }
+
+    private static int getEnergyPerTick() {
+        int energyCost = DMLConfig.MACHINE_SETTINGS.LOOT_FABRICATOR_RF_COST;
+        long energyPerTick = 100L * energyCost; // 100x the RF/t
+        return (int) Math.min(energyPerTick, Integer.MAX_VALUE);
     }
 
     //

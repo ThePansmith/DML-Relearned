@@ -36,11 +36,6 @@ public class DMLConstants {
         public static final int ENERGY_IN_MAX = 25600;
     }
 
-    public static final class LootFabricator {
-        public static final int ENERGY_CAPACITY = 2000000;
-        public static final int ENERGY_IN_MAX = 25600;
-    }
-
     public static final class TrialKeystone {
         public static final int TRIAL_AREA_RADIUS = 7; // Block radius of area that must be solid blocks, not including keystone itself
         public static final int TRIAL_AREA_HEIGHT = 9; // Block height of area that must be air blocks, not including keystone layer
