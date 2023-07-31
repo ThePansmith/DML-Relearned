@@ -234,3 +234,7 @@ deepmoblearning.affix.thunderdome.name=THUNDERDOME
 
 # Creative Tab
 itemGroup.deepmoblearning=Deep Mob Evolution
+
+# Keybinds
+deepmoblearning.key.lshift=LSHIFT
+deepmoblearning.key.lctrl=LCONTROL

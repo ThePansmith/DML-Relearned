@@ -1,25 +1,21 @@
 package mustapelto.deepmoblearning.client.util;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import org.lwjgl.input.Keyboard;
 
 public class KeyboardHelper {
+
     public static boolean isHoldingSneakKey() {
-        int keyCode = Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode();
-        return isHoldingKey(keyCode);
+        return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
     }
 
     public static boolean isHoldingSprintKey() {
-        int keyCode = Minecraft.getMinecraft().gameSettings.keyBindSprint.getKeyCode();
-        return isHoldingKey(keyCode);
-    }
-
-    private static boolean isHoldingKey(int keyCode) {
-        return Keyboard.isCreated() && Keyboard.isKeyDown(keyCode);
+        return Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
     }
 
     public static String getSneakKeyName() {
-        return Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName();
+        return I18n.format("deepmoblearning.key.lshift");
     }
 
     public static String getAttackKeyName() {
@@ -27,7 +23,7 @@ public class KeyboardHelper {
     }
 
     public static String getSprintKeyName() {
-        return Minecraft.getMinecraft().gameSettings.keyBindSprint.getDisplayName();
+        return I18n.format("deepmoblearning.key.lctrl");
     }
 
     public static String getUseKeyName() {
