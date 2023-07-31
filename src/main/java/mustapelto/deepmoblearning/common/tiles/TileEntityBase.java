@@ -68,4 +68,11 @@ public abstract class TileEntityBase extends TileEntity {
     public NBTTagCompound getUpdateTag() {
         return writeToNBT(new NBTTagCompound());
     }
+
+    @Override
+    public void markDirty() {
+        if (hasWorld() && pos != null) {
+            getWorld().markChunkDirty(pos, this);
+        }
+    }
 }
