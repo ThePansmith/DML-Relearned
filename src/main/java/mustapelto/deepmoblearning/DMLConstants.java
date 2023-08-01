@@ -10,7 +10,7 @@ public class DMLConstants {
         public static final String ID = Tags.MODID;
         public static final String NAME = Tags.MODNAME;
         public static final String VERSION = Tags.VERSION;
-        public static final String CONFIG_PATH = Tags.MODID;
+        public static final String CONFIG_PATH = "deepmobevolution";
     }
 
     public static final String MINECRAFT = "minecraft";
