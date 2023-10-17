@@ -3,7 +3,7 @@
 	"textures": {
 		"particle": "deepmoblearning:blocks/machine_yellow",
 		"sides": "deepmoblearning:blocks/machine_yellow",
-		"base": "deepmoblearning:blocks/machine_base"
+		"base": "deepmoblearning:blocks/machine_base_dme"
 	},
 	"elements": [
 		{

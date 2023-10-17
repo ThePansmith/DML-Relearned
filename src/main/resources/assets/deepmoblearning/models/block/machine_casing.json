@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"base": "deepmoblearning:blocks/machine_base"
+		"base": "deepmoblearning:blocks/machine_base_dme"
 	},
 	"elements": [
 		{

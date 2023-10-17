@@ -1,10 +1,10 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "deepmoblearning:blocks/machine_base",
+		"0": "deepmoblearning:blocks/machine_base_dme",
 		"1": "deepmoblearning:blocks/trial_keystone_container_top",
 		"2": "deepmoblearning:blocks/trial_keystone_side",
-		"particle": "deepmoblearning:blocks/machine_base"
+		"particle": "deepmoblearning:blocks/machine_base_dme"
 	},
 	"elements": [
 		{
