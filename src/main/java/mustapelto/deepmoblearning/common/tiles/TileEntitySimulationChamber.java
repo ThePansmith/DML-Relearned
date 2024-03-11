@@ -61,7 +61,7 @@ public class TileEntitySimulationChamber extends TileEntityMachine {
     }
 
     @Override
-    protected boolean canStartCrafting() {
+    public boolean canStartCrafting() {
         return super.canStartCrafting() && hasPolymerClay() && canContinueCrafting();
     }
 

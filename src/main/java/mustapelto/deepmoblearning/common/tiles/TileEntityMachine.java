@@ -74,14 +74,17 @@ public abstract class TileEntityMachine extends TileEntityTickable {
     }
 
     /**
-     * @return true if machine is redstone-activated and has enough energy
+     * @return true if machine is redstone-activated and has enough energy for a full iteration
      */
-    protected boolean canStartCrafting() {
-        return canContinueCrafting();
+    public boolean canStartCrafting() {
+        // Don't start crafting unless there's enough energy buffered to complete an entire iteration.
+        // fixes #31 (regression from DML)
+        return isRedstoneActive() &&
+            energyStorage.getEnergyStored() >= getCraftingEnergyCost() * Math.max(1, (getCraftingDuration() - 1));
     }
 
     /**
-     * @return true if machine is redstone-activated and has enough energy
+     * @return true if machine is redstone-activated and has enough energy for the next tick
      */
     protected boolean canContinueCrafting() {
         return isRedstoneActive() && hasEnergyForCrafting();
