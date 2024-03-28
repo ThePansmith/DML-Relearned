@@ -135,7 +135,7 @@ public class GuiSimulationChamber extends GuiMachine {
             return;
         }
 
-        if (!tileEntity.hasEnergyForCrafting()) {
+        if (!tileEntity.hasEnergyForCrafting() || !tileEntity.isCrafting() && !tileEntity.canStartCrafting()) {
             if (simulationError == SimulationError.ENERGY)
                 return;
 

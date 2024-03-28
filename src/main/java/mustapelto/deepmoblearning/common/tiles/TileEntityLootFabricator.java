@@ -73,7 +73,7 @@ public class TileEntityLootFabricator extends TileEntityMachine {
     }
 
     @Override
-    protected boolean canStartCrafting() {
+    public boolean canStartCrafting() {
         return super.canStartCrafting() && hasPristineMatter() && hasRoomForOutput() && isValidOutputItem();
     }
 
@@ -117,7 +117,7 @@ public class TileEntityLootFabricator extends TileEntityMachine {
     protected CraftingState updateCraftingState() {
         if (!crafting && !hasPristineMatter())
             return CraftingState.IDLE;
-        else if (!canStartCrafting() || !canContinueCrafting())
+        else if (!canContinueCrafting() || (!this.isCrafting() && !canStartCrafting()))
             return CraftingState.ERROR;
 
         return CraftingState.RUNNING;
