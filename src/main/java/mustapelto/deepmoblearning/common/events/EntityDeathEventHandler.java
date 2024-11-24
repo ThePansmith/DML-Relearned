@@ -61,6 +61,9 @@ public class EntityDeathEventHandler {
 
     @SubscribeEvent
     public static void entityDeath(LivingDeathEvent event) {
+        if (event.getEntityLiving().world.isRemote) {
+            return;
+        }
         if (event.getEntityLiving() instanceof EntityPlayer) {
             handlePlayerDeath((EntityPlayer) event.getEntityLiving());
         } else {
