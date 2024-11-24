@@ -10,6 +10,10 @@ import mustapelto.deepmoblearning.common.util.Rect;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class GuiMachine extends GuiContainerTickable {
 
     protected final TileEntityMachine tileEntity;
@@ -70,5 +74,19 @@ public abstract class GuiMachine extends GuiContainerTickable {
                 energyBar.WIDTH,
                 energyBarHeight
         );
+    }
+
+    /**
+     * Used for JEI Compat. By default, returns the rectangle covering the redstone button area.
+     */
+    public List<Rectangle> getGuiExclusionAreas() {
+        List<Rectangle> result = new ArrayList<>();
+        result.add(new Rectangle(
+                redstoneModeButton.x,
+                redstoneModeButton.y,
+                redstoneModeButton.width,
+                redstoneModeButton.height
+        ));
+        return result;
     }
 }

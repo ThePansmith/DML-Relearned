@@ -16,6 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -275,6 +276,18 @@ public class GuiSimulationChamber extends GuiMachine {
 
         drawInfoboxText(deltaTime, guiLeft + INFO_BOX.X, guiTop + INFO_BOX.Y);
         drawConsoleText(deltaTime, guiLeft + CONSOLE.X, guiTop + CONSOLE.Y);
+    }
+
+    @Override
+    public List<Rectangle> getGuiExclusionAreas() {
+        List<Rectangle> result =  super.getGuiExclusionAreas();
+        result.add(new Rectangle(
+                guiLeft + DATA_MODEL_SLOT.LEFT,
+                guiTop + DATA_MODEL_SLOT.TOP,
+                DATA_MODEL_SLOT.WIDTH,
+                DATA_MODEL_SLOT.HEIGHT
+        ));
+        return result;
     }
 
     private void drawInfoboxText(float advanceAmount, int left, int top) {

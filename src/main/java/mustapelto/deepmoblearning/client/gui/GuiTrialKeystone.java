@@ -20,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -327,6 +328,17 @@ public class GuiTrialKeystone extends GuiContainerTickable {
                 guiLeft + TRIAL_INFO_TEXT_RIGHT.X,
                 guiTop + TRIAL_INFO_TEXT_RIGHT.Y + (int)(2.5 * ROW_SPACING),
                 Colors.AQUA
+        );
+    }
+    
+    public List<Rectangle> getGuiExclusionAreas() {
+        return ImmutableList.of(
+                new Rectangle(
+                        guiLeft + TRIAL_KEY_SLOT.LEFT,
+                        guiTop + TRIAL_KEY_SLOT.TOP,
+                        TRIAL_KEY_SLOT.WIDTH,
+                        TRIAL_KEY_SLOT.HEIGHT
+                )
         );
     }
 }
