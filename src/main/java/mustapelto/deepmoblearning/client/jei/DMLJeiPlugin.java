@@ -1,6 +1,5 @@
 package mustapelto.deepmoblearning.client.jei;
 
-import com.google.common.collect.ImmutableList;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
@@ -47,6 +46,11 @@ public class DMLJeiPlugin implements IModPlugin {
 
     @Override
     public void register(@Nonnull IModRegistry registry) {
+
+        // Gui Handlers
+        registry.addAdvancedGuiHandlers(
+                new GuiExclusionHandlers.MachineGuiExclusion(),
+                new GuiExclusionHandlers.TrialGuiExclusion());
 
         // Simulation Chamber
         registry.handleRecipes(SimulationChamberRecipe.class, SimulationChamberWrapper::new, simChamberCategory.getUid());
