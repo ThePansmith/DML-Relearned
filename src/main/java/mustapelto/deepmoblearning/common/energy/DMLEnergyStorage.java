@@ -18,7 +18,9 @@ public class DMLEnergyStorage extends EnergyStorage {
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
-        onEnergyChanged();
+        if (!simulate) {
+            onEnergyChanged();
+        }
         return super.receiveEnergy(maxReceive, simulate);
     }
 
