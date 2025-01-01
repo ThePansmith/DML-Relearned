@@ -15,6 +15,7 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Optional;
@@ -85,16 +86,16 @@ public class MetadataManager {
 
     private static Optional<JsonArray> readConfigFile(File file) {
         JsonElement result;
-        FileReader fileReader;
+        InputStreamReader inputStreamReader;
         String filename = file.getName();
         try {
-            fileReader = new FileReader(file);
+            inputStreamReader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
         } catch (FileNotFoundException e) {
             DMLRelearned.logger.error("Config file \"{}\" not found! Error message: {}", filename, e.getMessage());
             return Optional.empty();
         }
 
-        try (JsonReader reader = new JsonReader(fileReader)) {
+        try (JsonReader reader = new JsonReader(inputStreamReader)) {
             JsonParser parser = new JsonParser();
             reader.setLenient(true);
             result = parser.parse(reader);
